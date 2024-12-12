@@ -1,1 +1,4 @@
 django
+brotli==1.1.0 
+whitenoise==6.8.2
+gunicorn==23.0.0
