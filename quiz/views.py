@@ -66,19 +66,19 @@ class QuestionView(View):
         except Question.DoesNotExist:
             return JsonResponse({'error': 'Invalid question.'}, status=400)
 
-        if action == 'submit':
-            selected_option = request.POST.get('selected_option')
+        selected_option = request.POST.get('selected_option')
+
+        if action == 'submit' and selected_option:
             session.total_questions += 1
             if question.correct_option == selected_option:
                 session.correct_answers += 1
             else:
                 session.incorrect_answers += 1
-
             session.visited_questions.add(question)
-        elif action == 'skip':
+        else:
             session.visited_questions.add(question)
             session.skipped_questions.add(question)
-
+        
         session.save()
         return redirect('quiz-question')
 
@@ -96,5 +96,6 @@ class ResultsView(View):
 
         return render(request, 'quiz/results.html', {
             'session': session,
-            'unanswered_questions': unanswered_questions,
+            'all_questions': len(all_questions),
+            'unanswered_questions': len(unanswered_questions),
         })

@@ -3,22 +3,65 @@
 <head>
     <title>Quiz Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+        .results-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+        }
+        .results-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .results-stat {
+            font-size: 1.2rem;
+            color: #444;
+        }
+        .results-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .btn-new-quiz {
+            background-color: #007bff;
+            border: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .btn-new-quiz:hover {
+            background-color: #0056b3;
+        }
+        .text-success {
+            font-weight: bold;
+        }
+        .text-danger {
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3 class="card-title">Quiz Results</h3>
-                <p class="card-text">Total Questions: <strong>{{ session.total_questions }}</strong></p>
-                <p class="card-text">Correct Answers: <strong class="text-success">{{ session.correct_answers }}</strong></p>
-                <p class="card-text">Incorrect Answers: <strong class="text-danger">{{ session.incorrect_answers }}</strong></p>
-                <p class="card-text">Unanswered Questions:</p>
-                <ul>
-                    {% for question in unanswered_questions %}
-                        <li>{{ question.question_text }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="{% url 'quiz-start' %}" class="btn btn-primary">Start New Quiz</a>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="results-card">
+                    <h2 class="results-title">Quiz Results</h2>
+                    <p class="results-stat">Total Questions: <strong>{{ all_questions }}</strong></p>
+                    <p class="results-stat">Correct Answers: <strong class="text-success">{{ session.correct_answers }}</strong></p>
+                    <p class="results-stat">Incorrect Answers: <strong class="text-danger">{{ session.incorrect_answers }}</strong></p>
+                    <p class="results-stat">Unanswered: <strong class="text-danger">{{ unanswered_questions }}</strong></p>
+                    <a href="{% url 'quiz-start' %}" class="btn btn-new-quiz mt-4">Start New Quiz</a>
+                </div>
             </div>
         </div>
     </div>
