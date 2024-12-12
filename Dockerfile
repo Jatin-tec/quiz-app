@@ -15,6 +15,9 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
+# expose port
+EXPOSE 10000
+
 # copy project
 COPY . .
 

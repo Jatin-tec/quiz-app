@@ -9,4 +9,4 @@ python manage.py collectstatic --no-input --clear
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '1234')" | python manage.py shell
 
 # Start server
-python manage.py runserver
+python manage.py runserver 0.0.0.0:10000
