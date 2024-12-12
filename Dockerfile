@@ -21,5 +21,8 @@ EXPOSE 10000
 # copy project
 COPY . .
 
+# permissions
+RUN chmod +x /usr/src/app/entrypoint.sh
+
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
